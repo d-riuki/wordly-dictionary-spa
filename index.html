@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wordly | Discover the Meaning</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header>
+    <h1>Wordly.</h1>
+    <p>Your personal dictionary</p>
+  </header>
+
+  <main>
+    <section class="search-section">
+      <h2>Discover the meaning of words</h2>
+      <p>Search for any English word to explore its meaning.</p>
+
+      <form id="search-form">
+        <label for="word-input">Enter a word</label>
+        <div class="search-box">
+          <input
+            type="text"
+            id="word-input"
+            placeholder="e.g. serendipity"
+            required
+          >
+          <button type="submit">Search</button>
+        </div>
+      </form>
+    </section>
+
+    <p id="message" role="status" aria-live="polite"></p>
+
+    <section id="results" class="results-section" hidden>
+      <div class="word-header">
+        <div>
+          <h2 id="word-title"></h2>
+          <p id="phonetic"></p>
+        </div>
+        <button id="audio-button" type="button" hidden>
+          Play pronunciation
+        </button>
+      </div>
+
+      <div id="definitions"></div>
+
+      <h3>Synonyms</h3>
+      <div id="synonyms"></div>
+
+      <div id="sources"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Wordly Dictionary &copy; 2026</p>
+  </footer>
+</body>
+</html>
