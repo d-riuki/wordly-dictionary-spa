@@ -10,9 +10,22 @@
 </head>
 <body>
   <header>
-    <h1>Wordly.</h1>
-    <p>Your personal dictionary</p>
-  </header>
+    <div class="header-content">
+    <div>
+      <h1>Wordly.</h1>
+      <p>Your personal dictionary</p>
+    </div>
+
+    <button
+      id="theme-toggle"
+      type="button"
+      aria-label="Switch to dark mode"
+      aria-pressed="false"
+    >
+      🌙 Dark Mode
+    </button>
+  </div>
+</header>
 
   <main>
     <section class="search-section">
@@ -47,7 +60,7 @@
       </div>
       
       <button id="save-button" type="button">
-        Save Word
+        ♡ Save Word
       </button>
 
       <div id="definitions"></div>
@@ -64,7 +77,7 @@
 
       <div id="saved-words"></div>
     </section>
-    
+
   </main>
 
   <footer>
