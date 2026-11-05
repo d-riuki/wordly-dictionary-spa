@@ -343,3 +343,82 @@ footer {
     transition-duration: 0.01ms !important;
   }
 }
+
+
+
+/* SAVED WORDS SECTION */
+
+.saved-section {
+  margin-top: 45px;
+  padding: 30px;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: 0 8px 25px rgba(32, 61, 50, 0.04);
+}
+
+.saved-section h2 {
+  font-family: Georgia, serif;
+  font-size: 28px;
+  font-weight: normal;
+  color: var(--primary);
+  margin-bottom: 5px;
+}
+
+.saved-section > p {
+  color: var(--muted);
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+/* SAVED WORD BUTTONS */
+
+#saved-words {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.saved-word {
+  background-color: var(--accent);
+  color: var(--primary);
+  border: 1px solid var(--border);
+  border-radius: 25px;
+  padding: 8px 16px;
+  font-size: 14px;
+}
+
+.saved-word:hover {
+  background-color: #d6e8d9;
+}
+
+/* SAVE WORD BUTTON */
+
+#save-button {
+  margin-bottom: 25px;
+  background-color: var(--accent);
+  color: var(--primary);
+  border: 1px solid var(--border);
+}
+
+#save-button:hover {
+  background-color: #d6e8d9;
+}
+
+#save-button.is-saved {
+  background-color: var(--primary);
+  color: white;
+}
+
+/* MOBILE RESPONSIVENESS */
+
+@media (max-width: 600px) {
+  .saved-section {
+    padding: 20px;
+    margin-top: 30px;
+  }
+
+  #save-button {
+    width: 100%;
+  }
+}
