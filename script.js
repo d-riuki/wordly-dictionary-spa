@@ -10,6 +10,17 @@ const definitionsContainer = document.querySelector("#definitions");
 const synonymsContainer = document.querySelector("#synonyms");
 const sourcesContainer = document.querySelector("#sources");
 const audioButton = document.querySelector("#audio-button");
+const saveButton = document.querySelector("#save-button");
+const savedWordsContainer = document.querySelector("#saved-words");
+
+let currentWord = "";
+
+let savedWords = JSON.parse(
+  localStorage.getItem("wordlySavedWords") || "[]"
+);
+
+displaySavedWords();
+
 
 // Listen for the user submitting the search form
 searchForm.addEventListener("submit", function (event) {
@@ -56,6 +67,9 @@ async function searchWord(word) {
 // Display the information returned by the API
 function displayWord(wordData) {
   wordTitle.textContent = wordData.word;
+  currentWord = wordData.word;
+  updateSaveButton();
+
   phonetic.textContent = wordData.phonetic || "Phonetic spelling unavailable";
 
   definitionsContainer.innerHTML = "";
@@ -154,3 +168,67 @@ function showMessage(text, isError = false) {
   message.textContent = text;
   message.classList.toggle("error", isError);
 }
+
+
+function updateSaveButton() {
+  const isSaved = savedWords.some(function (word) {
+    return word.toLowerCase() === currentWord.toLowerCase();
+  });
+
+  saveButton.textContent = isSaved
+    ? "♥ Saved"
+    : "♡ Save Word";
+
+  saveButton.classList.toggle("is-saved", isSaved);
+}
+
+saveButton.addEventListener("click", function () {
+  if (!currentWord || resultsSection.hidden) {
+    return;
+  }
+
+  const wordExists = savedWords.some(function (word) {
+    return word.toLowerCase() === currentWord.toLowerCase();
+  });
+
+  if (wordExists) {
+    savedWords = savedWords.filter(function (word) {
+      return word.toLowerCase() !== currentWord.toLowerCase();
+    });
+  } else {
+    savedWords.push(currentWord);
+  }
+
+  localStorage.setItem(
+    "wordlySavedWords",
+    JSON.stringify(savedWords)
+  );
+
+  updateSaveButton();
+  displaySavedWords();
+});
+
+function displaySavedWords() {
+  savedWordsContainer.innerHTML = "";
+
+  if (savedWords.length === 0) {
+    savedWordsContainer.textContent = "No saved words yet.";
+    return;
+  }
+
+  savedWords.forEach(function (word) {
+    const button = document.createElement("button");
+
+    button.type = "button";
+    button.textContent = word;
+    button.classList.add("saved-word");
+
+    button.addEventListener("click", function () {
+      wordInput.value = word;
+      searchWord(word);
+    });
+
+    savedWordsContainer.appendChild(button);
+  });
+}
+
