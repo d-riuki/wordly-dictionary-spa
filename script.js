@@ -12,6 +12,7 @@ const sourcesContainer = document.querySelector("#sources");
 const audioButton = document.querySelector("#audio-button");
 const saveButton = document.querySelector("#save-button");
 const savedWordsContainer = document.querySelector("#saved-words");
+const themeToggle = document.querySelector("#theme-toggle");
 
 let currentWord = "";
 
@@ -20,6 +21,7 @@ let savedWords = JSON.parse(
 );
 
 displaySavedWords();
+const savedTheme = localStorage.getItem("wordlyTheme") || "light";
 
 
 // Listen for the user submitting the search form
@@ -232,3 +234,36 @@ function displaySavedWords() {
   });
 }
 
+
+function applyTheme(theme) {
+  const isDark = theme === "dark";
+
+  document.body.classList.toggle("dark-mode", isDark);
+
+  themeToggle.textContent = isDark
+    ? "☀️ Light Mode"
+    : "🌙 Dark Mode";
+
+  themeToggle.setAttribute(
+    "aria-label",
+    isDark ? "Switch to light mode" : "Switch to dark mode"
+  );
+
+  themeToggle.setAttribute(
+    "aria-pressed",
+    String(isDark)
+  );
+}
+
+
+themeToggle.addEventListener("click", function () {
+  const isDark = document.body.classList.contains("dark-mode");
+
+  const newTheme = isDark ? "light" : "dark";
+
+  applyTheme(newTheme);
+
+  localStorage.setItem("wordlyTheme", newTheme);
+});
+
+applyTheme(savedTheme);
